@@ -3,6 +3,7 @@ import { Route, Switch, NavLink } from "react-router-dom"
 
 import './App.css';
 import GitHub from "./GitHub"
+import Esri from "./Esri"
 
 class App extends Component {
   render() {
@@ -17,10 +18,14 @@ class App extends Component {
           <li>
             <NavLink to="/github">GitHub API</NavLink>
           </li>
+          <li>
+            <NavLink to="/esri">Esri API</NavLink>
+          </li>
         </ul>
 
         <Switch>
           <Route path="/github" component={GitHub} />
+          <Route path="/esri" component={Esri} />
           <Route render={() => <p>
             <a href="https://www.youtube.com/watch?v=FArZxLj6DLk">Hi! Ho!</a>
             (to get started, click a link above)

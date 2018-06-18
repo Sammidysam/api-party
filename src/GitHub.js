@@ -3,6 +3,22 @@ import React, { Component } from "react"
 import "./GitHub.css"
 
 class GitHub extends Component {
+    constructor () {
+        super()
+
+        this.state = {
+            username: ""
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({ username: e.target.value })
+    }
+
+    handleSubmit = () => {
+
+    }
+
     render () {
         return (
             <div className="GitHub">
@@ -14,7 +30,7 @@ class GitHub extends Component {
 
                 <form>
                     <div>
-                        <input type="text" />
+                        <input type="text" value={this.state.username} onChange={this.handleChange} />
                     </div>
                     <div>
                         <button type="submit">

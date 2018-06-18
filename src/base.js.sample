@@ -1,0 +1,5 @@
+config = {
+    mapboxKey: "XXXXX"
+}
+
+export default config

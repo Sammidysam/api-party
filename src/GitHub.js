@@ -1,4 +1,7 @@
 import React, { Component } from "react"
+import { Route } from "react-router-dom"
+
+import GitHubUser from "./GitHubUser"
 
 import "./GitHub.css"
 
@@ -42,6 +45,8 @@ class GitHub extends Component {
                         </button>
                     </div>
                 </form>
+
+                <Route path="/github/:username" component={GitHubUser} />
             </div>
         )
     }

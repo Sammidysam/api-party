@@ -1,7 +1,11 @@
 import React, { Component } from "react"
-import ReactMapGL from "react-map-gl"
+import { InteractiveMap, Marker } from "react-map-gl"
+import FontAwesome from "react-fontawesome"
 
 import base from "./base"
+
+import "./EsriLocation.css"
+import "mapbox-gl/dist/mapbox-gl.css"
 
 class EsriLocation extends Component {
     constructor (props) {
@@ -22,7 +26,17 @@ class EsriLocation extends Component {
     fetchLocationData = () => {
         fetch(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&singleLine=${this.props.match.params.locationRequest}&outFields=Match_addr,Addr_type`)
         .then(response => response.json())
-        .then(location => this.setState({ location }))
+        .then(location => this.setState({ location, viewport: {
+            width: 800,
+            height: 600,
+            latitude: location.candidates[0].location.y,
+            longitude: location.candidates[0].location.x,
+            zoom: 10
+        } }))
+    }
+
+    updateViewport = (viewport) => {
+        this.setState({ viewport })
     }
 
     render () {
@@ -31,14 +45,17 @@ class EsriLocation extends Component {
         // This will wait until we have loaded our data to display anything.
         return Object.keys(location).length > 0 && (
             <div className="EsriLocation">
-                <ReactMapGL
-                width={400}
-                height={400}
-                latitude={location.candidates[0].location.x}
-                longitude={location.candidates[0].location.y}
-                zoom={8}
-                mapboxApiAccessToken={base.mapboxKey}
-                onViewportChange={viewport => this.setState({ viewport })} />
+                <h2>{location.candidates[0].address}</h2>
+                <div className="Map">
+                    <InteractiveMap
+                    {...this.state.viewport}
+                    mapboxApiAccessToken={base.mapboxKey}
+                    onViewportChange={this.updateViewport}>
+                        <Marker latitude={location.candidates[0].location.y} longitude={location.candidates[0].location.x} offsetLeft={-9} offsetTop={-8}>
+                            <FontAwesome name="star" />
+                        </Marker>
+                    </InteractiveMap>
+                </div>
             </div>
         )
     }

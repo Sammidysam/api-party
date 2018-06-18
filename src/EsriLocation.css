@@ -1,0 +1,7 @@
+.EsriLocation .Map {
+    margin: auto;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import { InteractiveMap, Marker } from "react-map-gl"
+import { InteractiveMap, Marker, NavigationControl } from "react-map-gl"
 import FontAwesome from "react-fontawesome"
 
 import base from "./base"
 
-import "./EsriLocation.css"
 import "mapbox-gl/dist/mapbox-gl.css"
+import "./EsriLocation.css"
 
 class EsriLocation extends Component {
     constructor (props) {
@@ -51,6 +51,9 @@ class EsriLocation extends Component {
                     {...this.state.viewport}
                     mapboxApiAccessToken={base.mapboxKey}
                     onViewportChange={this.updateViewport}>
+                        <div style={{position: 'absolute', right: 1, top: 1}}>
+                            <NavigationControl onViewportChange={this.updateViewport} />
+                        </div>
                         <Marker latitude={location.candidates[0].location.y} longitude={location.candidates[0].location.x} offsetLeft={-9} offsetTop={-8}>
                             <FontAwesome name="star" />
                         </Marker>

@@ -11,7 +11,7 @@
     border: 1px solid #d1d5da;
 }
 
-.Esri button {
+.Esri button[type="submit"] {
     color: white;
     margin-top: 10px;
     width: 80%;

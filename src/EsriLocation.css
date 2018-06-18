@@ -5,3 +5,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.EsriLocation .Map button {
+    margin: 0;
+}
